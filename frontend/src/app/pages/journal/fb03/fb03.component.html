@@ -1,0 +1,451 @@
+<div class="row" *ngIf="!isProcessed">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header align-items-center d-flex">
+        <h4 class="card-title mb-0 flex-grow-1">Key For Entry View</h4>
+      </div>
+
+      <!-- end card header -->
+      <div class="card-body">
+        <div class="live-preview">
+          <form [formGroup]="fb03Form">
+            <div class="row gy-4">
+              <div class="col-lg-12">
+                <!--  -->
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="documentNumber" class="form-label"
+                      >Document Number</label
+                    >
+                  </div>
+                  <div class="col-lg-9">
+                    <ng-select
+                      id="documentNumber"
+                      [items]="Default"
+                      bindLabel="name"
+                      bindValue="name"
+                      placeholder="-- Select Document Number --"
+                      formControlName="documentNumber"
+                    >
+                      <ng-template ng-optgroup-tmp let-item="item">
+                        {{ item.country || "Unnamed group" }}
+                      </ng-template>
+                    </ng-select>
+
+                    <div
+                      *ngIf="
+                        fb03Form.get('documentNumber')?.invalid &&
+                        fb03Form.get('documentNumber')?.touched
+                      "
+                      class="text-danger mb-1"
+                    >
+                      Document Number is required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="companyCode" class="form-label"
+                      >Company Code</label
+                    >
+                  </div>
+                  <div class="col-lg-9">
+                    <ng-select
+                      id="companyCode"
+                      [items]="Default"
+                      bindLabel="name"
+                      bindValue="name"
+                      placeholder="-- Select Company Code --"
+                      formControlName="companyCode"
+                    >
+                      <ng-template ng-optgroup-tmp let-item="item">
+                        {{ item.country || "Unnamed group" }}
+                      </ng-template>
+                    </ng-select>
+
+                    <div
+                      *ngIf="
+                        fb03Form.get('companyCode')?.invalid &&
+                        fb03Form.get('companyCode')?.touched
+                      "
+                      class="text-danger mb-1"
+                    >
+                      Company Code is required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="year" class="form-label">Fiscal Year</label>
+                  </div>
+                  <div class="col-lg-9">
+                    <ng-select
+                      id="year"
+                      [items]="Default"
+                      bindLabel="name"
+                      bindValue="name"
+                      placeholder="-- Select Year --"
+                      formControlName="year"
+                    >
+                      <ng-template ng-optgroup-tmp let-item="item">
+                        {{ item.country || "Unnamed group" }}
+                      </ng-template>
+                    </ng-select>
+
+                    <div
+                      *ngIf="
+                        fb03Form.get('year')?.invalid &&
+                        fb03Form.get('year')?.touched
+                      "
+                      class="text-danger mb-1"
+                    >
+                      Year is required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="d-flex flex-row-reverse">
+                  <div class="p-2 w-full">
+                    <button
+                      type="button"
+                      class="btn btn-primary add-btn btn-animation waves-effect waves-light primary-color"
+                      id="create-btn"
+                      data-text="Process"
+                      (click)="onProcessing()"
+                    >
+                      <span>Process</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!--end col-->
+            </div>
+          </form>
+          <!--end row-->
+
+          <!--end row-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end col-->
+</div>
+
+<div class="row" *ngIf="isProcessed">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header align-items-center d-flex">
+        <h4 class="card-title mb-0 flex-grow-1">Data Entry View</h4>
+      </div>
+      <!-- end card header -->
+      <div class="card-body">
+        <div class="live-preview">
+          <div class="row gy-4">
+            <div class="col-lg-6">
+              <!--  -->
+              <div class="row mb-3" style="align-items: baseline">
+                <div class="col-lg-3">
+                  <label
+                    for="documentNumber"
+                    class="form-label"
+                    style="font-size: 0.848rem"
+                    >Document Number</label
+                  >
+                </div>
+                <div class="col-lg-9">
+                  <ng-select
+                    [(ngModel)]="filterObj.documentNumber"
+                    id="documentNumber"
+                    [items]="Default"
+                    [multiple]="false"
+                    bindLabel="name"
+                    bindValue="name"
+                    placeholder="-- Select Document Number --"
+                  >
+                    <ng-template ng-optgroup-tmp let-item="item">
+                      {{ item.country || "Unnamed group" }}
+                    </ng-template>
+                  </ng-select>
+                </div>
+              </div>
+
+              <div class="row mb-3" style="align-items: baseline">
+                <div class="col-lg-3">
+                  <label for="documentDate" class="form-label"
+                    >Document Date</label
+                  >
+                </div>
+                <div class="col-lg-9">
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="documentDate"
+                    [(ngModel)]="filterObj.documentDate"
+                  />
+                </div>
+              </div>
+
+              <div class="row mb-3" style="align-items: baseline">
+                <div class="col-lg-3">
+                  <label for="year" class="form-label">Reference</label>
+                </div>
+                <div class="col-lg-9">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="reference"
+                    placeholder="Reference"
+                    [(ngModel)]="filterObj.reference"
+                  />
+                </div>
+              </div>
+
+              <div class="row mb-3" style="align-items: baseline">
+                <div class="col-lg-3">
+                  <label for="year" class="form-label">Currency</label>
+                </div>
+                <div class="col-lg-9">
+                  <ng-select
+                    [items]="Default"
+                    bindLabel="name"
+                    bindValue="name"
+                    [(ngModel)]="filterObj.currency"
+                    placeholder="-- Select Currency --"
+                  >
+                    <ng-template ng-optgroup-tmp let-item="item">
+                      {{ item.country || "Unnamed group" }}
+                    </ng-template>
+                  </ng-select>
+                </div>
+              </div>
+            </div>
+            <!--end col-->
+
+            <!-- Right form -->
+            <div class="col-lg-6">
+              <!--  -->
+              <div class="row mb-3" style="align-items: baseline">
+                <div class="col-lg-3">
+                  <label for="companyCode" class="form-label"
+                    >Company Code</label
+                  >
+                </div>
+                <div class="col-lg-9">
+                  <ng-select
+                    id="companyCode"
+                    [items]="Default"
+                    bindLabel="name"
+                    bindValue="name"
+                    placeholder="-- Select Company Code --"
+                    [(ngModel)]="filterObj.companyCode"
+                  >
+                    <ng-template ng-optgroup-tmp let-item="item">
+                      {{ item.country || "Unnamed group" }}
+                    </ng-template>
+                  </ng-select>
+                </div>
+              </div>
+
+              <div class="row mb-3" style="align-items: baseline">
+                <div class="col-lg-3">
+                  <label for="postingDate" class="form-label"
+                    >Posting Date</label
+                  >
+                </div>
+                <div class="col-lg-9">
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="postingDate"
+                    [(ngModel)]="filterObj.postingDate"
+                  />
+                </div>
+              </div>
+
+              <div class="row mb-3" style="align-items: baseline">
+                <div class="col-lg-3">
+                  <label for="year" class="form-label">Fiscal Year</label>
+                </div>
+                <div class="col-lg-9">
+                  <ng-select
+                    id="year"
+                    [items]="Default"
+                    bindLabel="name"
+                    bindValue="name"
+                    placeholder="-- Select Year --"
+                    [(ngModel)]="filterObj.year"
+                  >
+                    <ng-template ng-optgroup-tmp let-item="item">
+                      {{ item.country || "Unnamed group" }}
+                    </ng-template>
+                  </ng-select>
+                </div>
+              </div>
+
+              <div class="row mb-3" style="align-items: baseline">
+                <div class="col-lg-3">
+                  <label for="period" class="form-label">Period</label>
+                </div>
+                <div class="col-lg-9">
+                  <ng-select
+                    id="period"
+                    [items]="Default"
+                    bindLabel="name"
+                    bindValue="name"
+                    placeholder="-- Select Year --"
+                    [(ngModel)]="filterObj.period"
+                  >
+                    <ng-template ng-optgroup-tmp let-item="item">
+                      {{ item.country || "Unnamed group" }}
+                    </ng-template>
+                  </ng-select>
+                </div>
+              </div>
+            </div>
+            <!--end col-->
+          </div>
+          <!--end row-->
+
+          <!--end row-->
+        </div>
+        <div class="live-preview">
+          <div class="dropdown">
+            <button class="dropbtn" (click)="toggleDropdown()">⚙️</button>
+            <div class="dropdown-content" [class.show]="isDropdownOpen">
+              <div class="dropdown-scrollable">
+                <div *ngFor="let column of columns; let i = index">
+                  <label>
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      [checked]="!hiddenColumns.includes(i)"
+                      (change)="toggleColumnVisibility(i)"
+                    />
+                    {{ column }}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Table -->
+          <div class="table-responsive">
+            <div #hotContainer id="example"></div>
+          </div>
+
+          <!-- Pagination Controls -->
+          <div class="mt-3 d-flex justify-content-between">
+            <div class="d-flex align-items-center">
+              <select
+                class="form-control"
+                (change)="setPageSize($event)"
+                style="width: auto"
+              >
+                <option value="5" [selected]="itemsPerPage === 5">5</option>
+                <option value="10" [selected]="itemsPerPage === 10">10</option>
+                <option value="15" [selected]="itemsPerPage === 15">15</option>
+              </select>
+              <p class="mb-0" style="margin-left: 1rem">Rows / Page</p>
+            </div>
+
+            <div class="mt-2">
+              <span>
+                Showing
+                {{ (paginationService.currentPage - 1) * itemsPerPage + 1 }} to
+                {{
+                  paginationService.currentPage *
+                    paginationService.itemsPerPage >
+                  fb03s.length
+                    ? fb03s.length
+                    : paginationService.currentPage *
+                      paginationService.itemsPerPage
+                }}
+                of {{ fb03s.length }} rows
+              </span>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <button
+                  class="btn btn-sm primary-color mr-2"
+                  (click)="onPreviousPage()"
+                  [disabled]="paginationService.currentPage === 1"
+                >
+                  <!-- SVG for previous button -->
+                  <svg
+                    fill="#ffffff"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 32 32"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    stroke="#ffffff"
+                  >
+                    <g id="SVGRepo_iconCarrier">
+                      <path
+                        d="M23.505 0c0.271 0 0.549 0.107 0.757 0.316 0.417 0.417 0.417 1.098 0 1.515l-14.258 14.264 14.050 14.050c0.417 0.417 0.417 1.098 0 1.515s-1.098 0.417-1.515 0l-14.807-14.807c-0.417-0.417-0.417-1.098 0-1.515l15.015-15.022c0.208-0.208 0.486-0.316 0.757-0.316z"
+                      ></path>
+                    </g>
+                  </svg>
+                </button>
+                <span style="margin: 0 1rem 0 1rem">{{
+                  paginationService.currentPage
+                }}</span>
+                <button
+                  class="btn btn-sm primary-color"
+                  (click)="onNextPage()"
+                  [disabled]="
+                    paginationService.currentPage ===
+                    paginationService.totalPages
+                  "
+                >
+                  <svg
+                    fill="#ffffff"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 32 32"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    transform="rotate(180)"
+                    stroke="#ffffff"
+                  >
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      <path
+                        d="M23.505 0c0.271 0 0.549 0.107 0.757 0.316 0.417 0.417 0.417 1.098 0 1.515l-14.258 14.264 14.050 14.050c0.417 0.417 0.417 1.098 0 1.515s-1.098 0.417-1.515 0l-14.807-14.807c-0.417-0.417-0.417-1.098 0-1.515l15.015-15.022c0.208-0.208 0.486-0.316 0.757-0.316z"
+                      ></path>
+                    </g>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- End Table -->
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="d-flex flex-row-reverse">
+          <div class="p-2 w-full">
+            <button
+              type="button"
+              class="btn btn-danger add-btn btn-animation waves-effect waves-light"
+              id="create-btn"
+              data-text="Back"
+              (click)="onBackProcessing()"
+            >
+              <span>Back</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end col-->
+</div>

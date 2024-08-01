@@ -1,0 +1,365 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header align-items-center d-flex">
+        <h4 class="card-title mb-0 flex-grow-1">
+          View G/L Account Document ( Create Journal FB50 )
+        </h4>
+      </div>
+
+      <!-- end card header -->
+      <div class="card-body">
+        <div class="live-preview">
+          <form [formGroup]="fb50Form">
+            <div class="row gy-4">
+              <div class="col-lg-6">
+                <!--  -->
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="companyCode" class="form-label"
+                      >Company Code</label
+                    >
+                  </div>
+                  <div class="col-lg-9">
+                    <ng-select
+                      id="companyCode"
+                      [items]="Companies"
+                      bindLabel="name"
+                      bindValue="name"
+                      placeholder="-- Select Company Code --"
+                      formControlName="companyCode"
+                    >
+                      <ng-template ng-optgroup-tmp let-item="item">
+                        {{ item.country || "Unnamed group" }}
+                      </ng-template>
+                    </ng-select>
+
+                    <div
+                      *ngIf="
+                        fb50Form.get('companyCode')?.invalid &&
+                        fb50Form.get('companyCode')?.touched
+                      "
+                      class="text-danger mb-1"
+                    >
+                      Company Code is required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="documentDate" class="form-label"
+                      >Document Date</label
+                    >
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="documentDate"
+                      formControlName="documentDate"
+                    />
+                    <div
+                      *ngIf="
+                        fb50Form.get('documentDate')?.invalid &&
+                        fb50Form.get('documentDate')?.touched
+                      "
+                      class="text-danger mb-1"
+                    >
+                      Invoice Date is required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="postingDate" class="form-label"
+                      >Posting Date</label
+                    >
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="postingDate"
+                      formControlName="postingDate"
+                      (ngModelChange)="onPostingDateSelected($event)"
+                    />
+
+                    <div
+                      *ngIf="
+                        fb50Form.get('postingDate')?.invalid &&
+                        fb50Form.get('postingDate')?.touched
+                      "
+                      class="text-danger mb-1"
+                    >
+                      Posting Date is required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="headerText" class="form-label"
+                      >Header Text</label
+                    >
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="headerText"
+                      placeholder="Header Text"
+                      formControlName="headerText"
+                      maxlength="25"
+                    />
+                    <div
+                      *ngIf="
+                        fb50Form.get('headerText')?.invalid &&
+                        fb50Form.get('headerText')?.touched
+                      "
+                      class="text-danger mb-1"
+                    >
+                      Header Text is required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="reference" class="form-label">Reference </label>
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="reference"
+                      placeholder="Reference"
+                      formControlName="reference"
+                      maxlength="16"
+                    />
+                    <div
+                      *ngIf="
+                        fb50Form.get('reference')?.invalid &&
+                        fb50Form.get('reference')?.touched
+                      "
+                      class="text-danger mb-1"
+                    >
+                      Reference is required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="documentType" class="form-label"
+                      >Document type</label
+                    >
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="documentType"
+                      formControlName="documentType"
+                    />
+                  </div>
+                </div>
+              </div>
+              <!--end col-->
+
+              <!-- Right form -->
+              <div class="col-lg-6">
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="period" class="form-label">Period</label>
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="period"
+                      placeholder="0"
+                      formControlName="period"
+                    />
+                  </div>
+                </div>
+
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label class="form-label">Currency</label>
+                  </div>
+                  <div class="col-lg-9">
+                    <ng-select
+                      [items]="Default"
+                      bindLabel="code"
+                      bindValue="code"
+                      formControlName="currency"
+                      placeholder="-- Select Currency --"
+                    >
+                      <ng-template ng-optgroup-tmp let-item="item">
+                        {{ item.country || "Unnamed group" }}
+                      </ng-template>
+                    </ng-select>
+
+                    <div
+                      *ngIf="
+                        fb50Form.get('currency')?.invalid &&
+                        fb50Form.get('currency')?.touched
+                      "
+                      class="text-danger mb-1"
+                    >
+                      Currency is required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="bussinessPlace" class="form-label"
+                      >Bus.Place/Sectn</label
+                    >
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="bussinessPlace"
+                      placeholder="Bus.Place"
+                      formControlName="busPlace"
+                      maxlength="4"
+                    />
+                    <div
+                      *ngIf="
+                        fb50Form.get('busPlace')?.invalid &&
+                        fb50Form.get('busPlace')?.touched
+                      "
+                      class="text-danger mb-1"
+                    >
+                      Business Place is required.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--end col-->
+            </div>
+          </form>
+          <!--end row-->
+
+          <!--end row-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end col-->
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <!-- end card header -->
+      <div class="card-body">
+        <p></p>
+        <div class="live-preview">
+          <!-- Table -->
+          <div class="table-responsive">
+            <div #hotContainer id="example"></div>
+          </div>
+          <!-- End Table -->
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="d-flex flex-row-reverse">
+          <div class="p-2 w-full">
+            <button
+              type="button"
+              class="btn btn-primary add-btn btn-animation waves-effect waves-light"
+              id="create-btn"
+              (click)="postJournal('Submit')"
+              [disabled]="!checkCell() || !fb50Form.valid"
+              data-text="Submit"
+            >
+              <span>Submit</span>
+            </button>
+          </div>
+          <div class="p-2 w-full">
+            <button
+              type="button"
+              class="btn btn-info add-btn btn-animation waves-effect waves-light"
+              id="create-btn"
+              (click)="postJournal('Draft')"
+              data-text="Draft"
+              [disabled]="!checkCell() || !fb50Form.valid"
+            >
+              <span>Draft</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end col-->
+</div>
+
+<ng-template #content role="document" let-modal>
+  <div class="modal-header bg-light p-3">
+    <h5 class="modal-title">Input Profit Segment</h5>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="modal"
+      aria-label="Close"
+      id="close-modal"
+      (click)="cancelEdit()"
+    ></button>
+  </div>
+  <div class="modal-body p-4">
+    <form [formGroup]="profitSegmentForm">
+      <div class="mb-3">
+        <ng-select
+          id="profitSegment"
+          [items]="Default"
+          bindLabel="name"
+          bindValue="name"
+          placeholder="-- Select Product --"
+          formControlName="profitSegment"
+        >
+          <ng-template ng-optgroup-tmp let-item="item">
+            {{ item.country || "Unnamed group" }}
+          </ng-template>
+        </ng-select>
+
+        <div
+          *ngIf="
+            profitSegmentForm.get('profitSegment')?.invalid &&
+            profitSegmentForm.get('profitSegment')?.touched
+          "
+          class="text-danger mb-1"
+        >
+          Product is required.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="companyCode" class="form-label">Company Code</label>
+        <input
+          type="text"
+          class="form-control"
+          id="companyCode"
+          formControlName="companyCode"
+        />
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer p-3">
+    <button type="button" class="btn btn-secondary" (click)="cancelEdit()">
+      Cancel
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="onSubmitProfitSegment()"
+    >
+      Save changes
+    </button>
+  </div>
+</ng-template>

@@ -1,0 +1,19 @@
+.websap-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.websap-text {
+  font-size: 2rem;
+  font-weight: bold;
+  background: radial-gradient(
+    circle,
+    rgba(53, 140, 202, 1) 0%,
+    rgba(26, 69, 100, 1) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-right: 10px;
+}

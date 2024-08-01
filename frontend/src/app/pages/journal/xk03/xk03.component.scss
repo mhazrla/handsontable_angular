@@ -1,0 +1,53 @@
+/* Dropdown Button */
+.dropbtn {
+  border: none;
+  cursor: pointer;
+}
+
+/* Dropdown container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* Ensures dropdown content is above other elements */
+}
+
+/* Show the dropdown content when .show class is added */
+.dropdown-content.show {
+  display: block;
+}
+
+/* Container for scrollable content */
+.dropdown-scrollable {
+  max-height: 200px; /* Adjust height as needed */
+  overflow-y: auto; /* Enables vertical scrolling */
+  min-width: 12.3rem;
+}
+
+/* Style for the dropdown items */
+.dropdown-content label {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content label:hover {
+  background-color: #f1f1f1;
+}
+
+.primary-color {
+  background-color: #307fb7;
+  color: #ffffff;
+  &:hover {
+    background-color: #225981;
+  }
+}
