@@ -1,1 +1,446 @@
-<p>as03 works!</p>
+<div class="row" *ngIf="!isProcessed">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header align-items-center d-flex">
+        <h4 class="card-title mb-0 flex-grow-1">
+          Display Asset: Initial Screen
+        </h4>
+      </div>
+
+      <!-- end card header -->
+      <div class="card-body">
+        <div class="live-preview">
+          <form [formGroup]="as03Form">
+            <div class="row gy-4 mb-4">
+              <div class="col-lg-12">
+                <!--  -->
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="companyCode" class="form-label"
+                      >Company Code</label
+                    >
+                  </div>
+                  <div class="col-lg-4">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="companyCode"
+                      formControlName="companyCode"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="asset" class="form-label">Asset</label>
+                  </div>
+                  <div class="col-lg-4">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="asset"
+                      formControlName="asset"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="subnumber" class="form-label">Subnumber</label>
+                  </div>
+                  <div class="col-lg-4">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="subnumber"
+                      formControlName="subnumber"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+              </div>
+              <!--end col-->
+            </div>
+          </form>
+          <!--end row-->
+          <div class="d-flex flex-row-reverse">
+            <div class="p-2 w-full">
+              <button
+                type="button"
+                class="btn add-btn btn-animation waves-effect waves-light primary-color"
+                id="create-btn"
+                data-text="Process"
+                (click)="onProcessing()"
+              >
+                <span>Process</span>
+              </button>
+            </div>
+          </div>
+          <!--end row-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end col-->
+</div>
+
+<div class="row" *ngIf="isProcessed">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header align-items-center d-flex">
+        <h4 class="card-title mb-0 flex-grow-1">Display Asset: Master Data</h4>
+      </div>
+      <!-- end card header -->
+      <div class="card-body">
+        <div class="live-preview">
+          <form>
+            <div class="row gy-4 mb-4">
+              <div class="col-lg-6">
+                <!--  -->
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="createdBy" class="form-label">Created By</label>
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="createdBy"
+                      formControlName="createdBy"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="createdOn" class="form-label">Created On</label>
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="createdOn"
+                      formControlName="createdOn"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <!--  -->
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="changeBy" class="form-label">Changed By</label>
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="changeBy"
+                      formControlName="changeBy"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+
+                <div class="row" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="changedOn" class="form-label">Changed On</label>
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="changedOn"
+                      formControlName="changedOn"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-4 text-center">
+                    <label for="inventoryNumber" class="form-label"
+                      >Inventory Number</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="inventoryNumber"
+                      formControlName="inventoryNumber"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                  <div class="col-lg-4 text-center">
+                    <label for="inventoryNote" class="form-label"
+                      >Inventory Note</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="inventoryNote"
+                      formControlName="inventoryNote"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                  <div class="col-lg-4 text-center">
+                    <label for="ownership" class="form-label"
+                      >Ownership</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="ownership"
+                      formControlName="ownership"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-4 text-center">
+                    <label for="companyCode" class="form-label"
+                      >Company Code</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="companyCode"
+                      formControlName="companyCode"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                  <div class="col-lg-4 text-center">
+                    <label for="serialNumber" class="form-label"
+                      >Serial Number</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="serialNumber"
+                      formControlName="serialNumber"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                  <div class="col-lg-4 text-center">
+                    <label for="assetClass" class="form-label"
+                      >Asset Class</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="assetClass"
+                      formControlName="assetClass"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <!--  -->
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="asset" class="form-label">Asset</label>
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="asset"
+                      formControlName="asset"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="quantity" class="form-label">Quantity</label>
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="quantity"
+                      formControlName="quantity"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="baseUnitOfMeasure" class="form-label"
+                      >Base Unit Of Measure</label
+                    >
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="baseUnitOfMeasure"
+                      formControlName="baseUnitOfMeasure"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="row mb-4" style="align-items: baseline">
+                  <div>
+                    <label for="description" class="form-label"
+                      >Description</label
+                    >
+                    <textarea
+                      class="form-control"
+                      id="description"
+                      rows="3"
+                      formControlName="description"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-4 text-center">
+                    <label for="vendor" class="form-label"
+                      >Vendor</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="vendor"
+                      formControlName="vendor"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                  <div class="col-lg-4 text-center">
+                    <label for="investmentOrder" class="form-label"
+                      >Investment Order</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="investmentOrder"
+                      formControlName="investmentOrder"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                  <div class="col-lg-4 text-center">
+                    <label for="nonDeductible" class="form-label"
+                      >Non Deductible</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="nonDeductible"
+                      formControlName="nonDeductible"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-4 text-center">
+                    <label for="firstAcquisitionPeriod" class="form-label"
+                      >First acquisition period</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="firstAcquisitionPeriod"
+                      formControlName="firstAcquisitionPeriod"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                  <div class="col-lg-4 text-center">
+                    <label for="capitalizedOn" class="form-label"
+                      >Capitalized on</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="capitalizedOn"
+                      formControlName="capitalizedOn"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                  <div class="col-lg-4 text-center">
+                    <label for="fiscalPerspective" class="form-label"
+                      >Fiscal Perspective</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="fiscalPerspective"
+                      formControlName="fiscalPerspective"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-4 text-center">
+                    <label for="firstAcquisitionOn" class="form-label"
+                      >First acquisition on</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="firstAcquisitionOn"
+                      formControlName="firstAcquisitionOn"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                  <div class="col-lg-4 text-center">
+                    <label for="commPerspective" class="form-label"
+                      >Comm. Perspective</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="commPerspective"
+                      formControlName="commPerspective"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                  <div class="col-lg-4 text-center">
+                    <label for="acquisitionYear" class="form-label"
+                      >Acquisition Year</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="acquisitionYear"
+                      formControlName="acquisitionYear"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!--end col-->
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="d-flex flex-row-reverse">
+          <div class="p-2 w-full">
+            <button
+              type="button"
+              class="btn btn-danger add-btn btn-animation waves-effect waves-light"
+              id="create-btn"
+              data-text="Back"
+              (click)="onBackProcessing()"
+            >
+              <span>Back</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end col-->
+</div>

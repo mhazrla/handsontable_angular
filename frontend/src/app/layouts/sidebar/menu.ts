@@ -55,6 +55,19 @@ export const MENU: MenuItem[] = [
         link: '/journal/as03',
         parentId: 6,
       },
+      {
+        id: 9,
+        label:
+          'MENUITEMS.DisplayModule.LIST.Print Voucher Settlement YAIOFF003',
+        link: '/journal/yaioff003',
+        parentId: 6,
+      },
+      {
+        id: 10,
+        label: 'MENUITEMS.DisplayModule.LIST.Print Voucher Settlement ZFF001',
+        link: '/journal/zff001',
+        parentId: 6,
+      },
     ],
   },
   {

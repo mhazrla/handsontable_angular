@@ -1,0 +1,134 @@
+<div class="row" *ngIf="!isProcessed">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header align-items-center d-flex">
+        <h4 class="card-title mb-0 flex-grow-1">Request For Payment</h4>
+      </div>
+
+      <!-- end card header -->
+      <div class="card-body">
+        <div class="live-preview">
+          <form [formGroup]="yaioff003Form">
+            <div class="row gy-4 mb-4">
+              <div class="col-lg-12">
+                <!--  -->
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="accountingDocument" class="form-label"
+                      >Accounting Document</label
+                    >
+                  </div>
+                  <div class="col-lg-4">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="accountingDocument"
+                      formControlName="accountingDocument"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="date" class="form-label">Date</label>
+                  </div>
+                  <div class="col-lg-4">
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="date"
+                      formControlName="date"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="fiscalYear" class="form-label"
+                      >Fiscal Year</label
+                    >
+                  </div>
+                  <div class="col-lg-4">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="fiscalYear"
+                      formControlName="fiscalYear"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="companyCode" class="form-label"
+                      >Company Code</label
+                    >
+                  </div>
+                  <div class="col-lg-4">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="companyCode"
+                      formControlName="companyCode"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+              </div>
+              <!--end col-->
+            </div>
+          </form>
+          <!--end row-->
+          <div class="d-flex flex-row-reverse">
+            <div class="p-2 w-full">
+              <button
+                type="button"
+                class="btn add-btn btn-animation waves-effect waves-light primary-color"
+                id="create-btn"
+                data-text="Process"
+                (click)="onProcessing()"
+              >
+                <span>Process</span>
+              </button>
+            </div>
+          </div>
+          <!--end row-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end col-->
+</div>
+
+<div class="row" *ngIf="isProcessed">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header align-items-center d-flex">
+        <h4 class="card-title mb-0 flex-grow-1">Vendor Line Item Display</h4>
+      </div>
+      <!-- end card header -->
+      <div class="card-body">
+        <div class="live-preview">asf</div>
+      </div>
+      <div class="card-footer">
+        <div class="d-flex flex-row-reverse">
+          <div class="p-2 w-full">
+            <button
+              type="button"
+              class="btn btn-danger add-btn btn-animation waves-effect waves-light"
+              id="create-btn"
+              data-text="Back"
+              (click)="onBackProcessing()"
+            >
+              <span>Back</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end col-->
+</div>

@@ -21,6 +21,8 @@ import { CreateFbl1nComponent } from './fbl1n/create-fbl1n/create-fbl1n.componen
 import { Xk03Component } from './xk03/xk03.component';
 import { DetailXk03Component } from './xk03/detail-xk03/detail-xk03.component';
 import { As03Component } from './as03/as03.component';
+import { Yaioff003Component } from './yaioff003/yaioff003.component';
+import { Zff001Component } from './zff001/zff001.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { As03Component } from './as03/as03.component';
     Xk03Component,
     DetailXk03Component,
     As03Component,
+    Yaioff003Component,
+    Zff001Component,
   ],
   imports: [
     CommonModule,

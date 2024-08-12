@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -19,6 +19,7 @@ export class DetailXk03Component implements OnInit {
   xk03Form!: FormGroup;
   submitted: boolean = false;
   selectedRow: number | null = null;
+  isProcessed: boolean = false;
 
   // Data
   xk03s: any[] = [];
@@ -89,7 +90,8 @@ export class DetailXk03Component implements OnInit {
     private router: Router,
     private modalService: NgbModal,
     private alertService: AlertService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -131,6 +133,9 @@ export class DetailXk03Component implements OnInit {
       .then((response) => response.json())
       .then((json) => {
         this.xk03s = json;
+        this.cdr.detectChanges();
+        if (this.isProcessed) {
+        }
         this.setupTable('table1');
         this.setupTable('table2');
       });
@@ -273,5 +278,10 @@ export class DetailXk03Component implements OnInit {
       tableConfig.dataToShow = this.paginateData(tableConfig);
       this.initializeHandsontable(tableKey);
     }
+  }
+
+  onBackProcessing() {
+    this.isProcessed = false;
+    this.cdr.detectChanges();
   }
 }

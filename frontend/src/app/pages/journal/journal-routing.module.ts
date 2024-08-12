@@ -14,6 +14,8 @@ import { Fbl1nComponent } from './fbl1n/fbl1n.component';
 import { Xk03Component } from './xk03/xk03.component';
 import { DetailXk03Component } from './xk03/detail-xk03/detail-xk03.component';
 import { As03Component } from './as03/as03.component';
+import { Yaioff003Component } from './yaioff003/yaioff003.component';
+import { Zff001Component } from './zff001/zff001.component';
 
 const routes: Routes = [
   {
@@ -71,6 +73,14 @@ const routes: Routes = [
   {
     path: 'as03',
     component: As03Component,
+  },
+  {
+    path: 'yaioff003',
+    component: Yaioff003Component,
+  },
+  {
+    path: 'zff01',
+    component: Zff001Component,
   },
 ];
 

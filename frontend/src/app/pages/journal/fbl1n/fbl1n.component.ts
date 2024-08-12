@@ -42,7 +42,7 @@ export class Fbl1nComponent implements OnInit, AfterViewInit {
   isProcessed: boolean = false;
 
   // Filter
-  public filterObj: any = {
+  public displayedData: any = {
     documentNumber: null,
     documentDate: null,
     reference: null,
