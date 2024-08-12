@@ -20,8 +20,8 @@
         "Vendor Line Item Display FBL1N": "Vendor Line Item Display FBL1N",
         "Display Master Vendor XK03": "Display Master Vendor XK03",
         "Display Asset AS03": "Display Asset AS03",
-        "Print Voucher Settlement YAIOFF003": "Print Voucher Settlement YAIOFF003",
-        "Print Voucher Settlement ZFF001": "Print Voucher Settlement ZFF001"
+        "Print Payment Voucher YAIOFF003": "Print Payment Voucher YAIOFF003",
+        "Print Settlement Voucher ZFF001": "Print Settlement Voucher ZFF001"
       }
     },
     "MASTER": {

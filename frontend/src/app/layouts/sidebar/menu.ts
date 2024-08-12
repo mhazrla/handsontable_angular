@@ -57,14 +57,13 @@ export const MENU: MenuItem[] = [
       },
       {
         id: 9,
-        label:
-          'MENUITEMS.DisplayModule.LIST.Print Voucher Settlement YAIOFF003',
+        label: 'MENUITEMS.DisplayModule.LIST.Print Payment Voucher YAIOFF003',
         link: '/journal/yaioff003',
         parentId: 6,
       },
       {
         id: 10,
-        label: 'MENUITEMS.DisplayModule.LIST.Print Voucher Settlement ZFF001',
+        label: 'MENUITEMS.DisplayModule.LIST.Print Settlement Voucher ZFF001',
         link: '/journal/zff001',
         parentId: 6,
       },
