@@ -1,0 +1,548 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs
+  title="Users"
+  [breadcrumbItems]="breadCrumbItems"
+></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card" id="userList">
+      <div class="card-header border-0">
+        <div class="row align-items-center gy-3">
+          <div class="col-sm">
+            <h5 class="card-title mb-0">Master User (NON AIO)</h5>
+          </div>
+        </div>
+      </div>
+      <div class="card-body border border-dashed border-end-0 border-start-0">
+        <div class="row align-items-center gy-3 d-flex justify-content-between">
+          <div class="col-xxl-5 col-sm-6">
+            <div class="search-box">
+              <input
+                type="text"
+                name="searchTerm"
+                class="form-control"
+                placeholder="Search for Name, email, or something..."
+                [(ngModel)]="service.searchTerm"
+              />
+              <i class="ri-search-line search-icon"></i>
+            </div>
+          </div>
+          <!--end col-->
+          <div class="col-sm-auto hstack gap-2">
+            <button
+              type="button"
+              class="btn primary-color add-btn"
+              data-bs-toggle="modal"
+              id="create-btn"
+              data-bs-target="#showModal"
+              (click)="openModal(content)"
+            >
+              <i class="ri-add-line align-bottom me-1"></i> Add User
+            </button>
+          </div>
+          <!-- end col -->
+        </div>
+        <!--end row-->
+      </div>
+      <div class="card-body pt-0">
+        <div>
+          <!-- Table -->
+          <div class="table-responsive table-card mb-0 mt-3">
+            <table class="table">
+              <thead>
+                <tr class="bg-light text-muted text-uppercase">
+                  <th
+                    class="sort"
+                    usersortable="nik"
+                    (userssort)="onSort($event)"
+                  >
+                    NIK
+                  </th>
+                  <th
+                    class="sort"
+                    usersortable="name"
+                    (userssort)="onSort($event)"
+                  >
+                    Name
+                  </th>
+                  <th
+                    class="sort"
+                    usersortable="email"
+                    (userssort)="onSort($event)"
+                  >
+                    Email
+                  </th>
+                  <th
+                    class="sort"
+                    usersortable="work_location"
+                    (userssort)="onSort($event)"
+                  >
+                    Work Location
+                  </th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let data of users">
+                  <tr id="u_{{ data.id }}">
+                    <td>
+                      <ngb-highlight
+                        [result]="data.nik"
+                        [term]="service.searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="data.name"
+                        [term]="service.searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="data.email"
+                        [term]="service.searchTerm"
+                      >
+                      </ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="data.work_location | titlecase"
+                        [term]="service.searchTerm"
+                      >
+                      </ngb-highlight>
+                    </td>
+
+                    <td>
+                      <ul class="list-inline hstack gap-2 mb-0">
+                        <li
+                          class="list-inline-item edit"
+                          data-bs-toggle="tooltip"
+                          data-bs-trigger="hover"
+                          ngbTooltip="Edit"
+                          placement="top"
+                        >
+                          <a
+                            href="javascript:void(0);"
+                            data-bs-toggle="modal"
+                            class="text-primary d-inline-block edit-item-btn"
+                            data-bs-toggle="modal"
+                            id="create-btn"
+                            data-bs-target="#showModal"
+                            (click)="
+                              editDataGet(data.id, content); enableEditMode()
+                            "
+                          >
+                            <i class="ri-pencil-fill fs-16"></i>
+                          </a>
+                        </li>
+                        <li
+                          class="list-inline-item me-0"
+                          ngbTooltip="Remove"
+                          placement="top"
+                          data-bs-toggle="tooltip"
+                          data-bs-trigger="hover"
+                          (click)="confirm(deleteModel, data.id)"
+                        >
+                          <a
+                            class="text-danger d-inline-block remove-item-btn"
+                            data-bs-toggle="modal"
+                            data-bs-target="#deleteUser"
+                          >
+                            <i class="ri-delete-bin-5-fill fs-16"></i>
+                          </a>
+                        </li>
+                      </ul>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+          <div
+            class="row justify-content-md-between align-items-md-center gy-2"
+          >
+            <div class="col col-sm-6">
+              <div
+                class="dataTables_info mb-2"
+                id="tickets-table_info"
+                role="status"
+                aria-live="polite"
+              >
+                Showing
+                {{ service.startIndex }} to {{ service.endIndex }} of
+                {{ service.totalRecords }}
+                entries
+              </div>
+            </div>
+            <!-- Pagination -->
+            <div class="col col-sm-6">
+              <div class="text-sm-right float-end listjs-pagination">
+                <ngb-pagination
+                  [collectionSize]="(total | async)!"
+                  [(page)]="service.page"
+                  [pageSize]="service.pageSize"
+                >
+                </ngb-pagination>
+              </div>
+            </div>
+            <!-- End Pagination -->
+          </div>
+          <!-- End Table -->
+
+          <!-- User Create Model -->
+          <ng-template #content role="document" let-modal>
+            <div class="form-modal-header bg-light p-3">
+              <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+            </div>
+            <form
+              (ngSubmit)="saveUser()"
+              [formGroup]="userForm"
+              class="tablelist-form"
+              autocomplete="off"
+            >
+              <div class="modal-body">
+                <input type="hidden" name="id" value="" formControlName="id" />
+                <!-- Row 1  -->
+                <div class="row gy-4 mb-3">
+                  <!-- NIK -->
+                  <div class="col-md-6">
+                    <div>
+                      <label for="nik-field" class="form-label"
+                        >NIK<small class="text-danger fs-5">*</small></label
+                      >
+                      <input
+                        type="text"
+                        id="nik-field"
+                        class="form-control"
+                        placeholder="Enter NIK"
+                        formControlName="nik"
+                        [ngClass]="{
+                          'is-invalid': submitted && form['nik'].errors
+                        }"
+                      />
+                      <div
+                        *ngIf="submitted && form['nik'].errors"
+                        class="invalid-feedback"
+                        align="left"
+                      >
+                        <div *ngIf="form['nik'].errors['required']">
+                          NIK is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Name -->
+                  <div class="col-md-6">
+                    <div>
+                      <label for="name-field" class="form-label">
+                        Name<small class="text-danger fs-5">*</small></label
+                      >
+                      <input
+                        type="text"
+                        id="name-field"
+                        class="form-control"
+                        placeholder="Enter Name"
+                        required
+                        formControlName="name"
+                        [ngClass]="{
+                          'is-invalid': submitted && form['name'].errors
+                        }"
+                      />
+                      <div
+                        *ngIf="submitted && form['name'].errors"
+                        class="invalid-feedback"
+                        align="left"
+                      >
+                        <div *ngIf="form['name'].errors['required']">
+                          Name is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="row gy-4 mb-3">
+                  <!-- Email -->
+                  <div class="col-md-6">
+                    <label for="email-field" class="form-label"
+                      >Email<small class="text-danger fs-5">*</small></label
+                    >
+                    <input
+                      type="email"
+                      id="email-field"
+                      class="form-control"
+                      placeholder="Enter Email"
+                      required
+                      formControlName="email"
+                      [ngClass]="{
+                        'is-invalid': submitted && form['email'].errors
+                      }"
+                    />
+                    <div
+                      *ngIf="submitted && form['email'].errors"
+                      class="invalid-feedback"
+                      align="left"
+                    >
+                      <div *ngIf="form['email'].errors['required']">
+                        Email is required
+                      </div>
+                      <div *ngIf="form['email'].errors['email']">
+                        Please enter a valid email address
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Work Location -->
+                  <div class="col-md-6">
+                    <label for="work_location-field" class="form-label"
+                      >Work Location<small class="text-danger fs-5"
+                        >*</small
+                      ></label
+                    >
+                    <ng-select
+                      [items]="WorkLocation"
+                      bindLabel="name"
+                      bindValue="name"
+                      formControlName="work_location"
+                      placeholder="Select Work Location"
+                      [ngClass]="{
+                        'is-invalid': submitted && form['work_location'].errors
+                      }"
+                    >
+                    </ng-select>
+
+                    <div
+                      *ngIf="submitted && form['work_location'].errors"
+                      class="invalid-feedback"
+                      align="left"
+                    >
+                      <div
+                        *ngIf="
+                          form['work_location'].errors &&
+                          form['work_location'].errors['required']
+                        "
+                      >
+                        Work Location is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row gy-4 mb-3">
+                  <!-- Phone Number -->
+                  <div class="col-12">
+                    <div>
+                      <label for="phone_number-field" class="form-label"
+                        >Phone Number<small class="text-danger fs-5"
+                          >*</small
+                        ></label
+                      >
+                      <input
+                        type="text"
+                        id="phone_number-field"
+                        class="form-control"
+                        placeholder="088XXXXXX"
+                        required
+                        formControlName="phone_number"
+                        [ngClass]="{
+                          'is-invalid': submitted && form['phone_number'].errors
+                        }"
+                      />
+                      <div
+                        *ngIf="submitted && form['phone_number'].errors"
+                        class="invalid-feedback"
+                        align="left"
+                      >
+                        <div *ngIf="form['phone_number'].errors['required']">
+                          Phone Number is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row gy-4 mb-3" *ngIf="isEditMode">
+                  <!-- Old Password -->
+                  <div class="col-12">
+                    <div>
+                      <label for="old_password-field" class="form-label"
+                        >Old Password</label
+                      >
+                      <input
+                        type="password"
+                        id="old_password-field"
+                        class="form-control"
+                        placeholder="*******"
+                        required
+                        formControlName="old_password"
+                        [ngClass]="{
+                          'is-invalid': submitted && form['old_password'].errors
+                        }"
+                      />
+                      <div
+                        *ngIf="submitted && form['old_password'].errors"
+                        class="invalid-feedback"
+                        align="left"
+                      >
+                        <div *ngIf="form['old_password'].errors['required']">
+                          Old Password is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row gy-4 mb-3">
+                  <!-- Password -->
+                  <div class="col-md-6">
+                    <div>
+                      <label
+                        for="password-field"
+                        class="form-label"
+                        id="password-label"
+                        >Password</label
+                      >
+                      <input
+                        type="password"
+                        id="password-field"
+                        class="form-control"
+                        placeholder="********"
+                        required
+                        minlength="8"
+                        formControlName="password"
+                        [ngClass]="{
+                          'is-invalid': submitted && form['password'].errors
+                        }"
+                      />
+                      <div
+                        *ngIf="submitted && form['password'].errors"
+                        class="invalid-feedback"
+                        align="left"
+                      >
+                        <div *ngIf="form['password'].errors['required']">
+                          Password is required
+                        </div>
+                        <div *ngIf="form['password'].errors['minlength']">
+                          Password must be at least 8 characters long
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Confirm Password -->
+                  <div class="col-md-6">
+                    <label for="confirmPassword-field" class="form-label"
+                      >Confirm Password</label
+                    >
+                    <input
+                      type="password"
+                      id="confirmPassword-field"
+                      class="form-control"
+                      placeholder="********"
+                      required
+                      minlength="8"
+                      formControlName="confirmPassword"
+                      [ngClass]="{
+                        'is-invalid':
+                          submitted && form['confirmPassword'].errors
+                      }"
+                    />
+                    <div
+                      *ngIf="form['confirmPassword'].errors"
+                      class="invalid-feedback"
+                      align="left"
+                    >
+                      <div *ngIf="form['confirmPassword'].errors['required']">
+                        Confirmation Password is required
+                      </div>
+                      <div
+                        *ngIf="
+                          form['confirmPassword'].errors['passwordMismatch']
+                        "
+                      >
+                        Passwords must match
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <div class="hstack gap-2 justify-content-end">
+                  <button
+                    type="button"
+                    class="btn btn-light"
+                    data-bs-dismiss="modal"
+                    (click)="cancelEdit()"
+                  >
+                    Cancel
+                  </button>
+                  <button type="submit" class="btn btn-primary" id="add-btn">
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </form>
+          </ng-template>
+          <!--End Modal -->
+        </div>
+      </div>
+    </div>
+    <!--end col-->
+  </div>
+  <!--end row-->
+
+  <!-- removeItemModal -->
+  <ng-template #deleteModel let-modal>
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          id="btn-close"
+          (click)="modal.dismiss('Cross click')"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="mt-2 text-center">
+          <lord-icon
+            src="https://cdn.lordicon.com/gsqxdxog.json"
+            trigger="loop"
+            colors="primary:#405189,secondary:#f06548"
+            style="width: 90px; height: 90px"
+          ></lord-icon>
+          <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
+            <h4>You are about to delete this user ?</h4>
+            <p class="text-muted mx-4 mb-0">
+              Deleting your order will remove all of your information from our
+              database.
+            </p>
+          </div>
+        </div>
+        <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+          <button
+            class="btn btn-link link-success fw-medium text-decoration-none"
+            data-bs-dismiss="modal"
+            id="deleteRecord-close"
+            (click)="modal.close('Close click')"
+          >
+            <i class="ri-close-line me-1 align-middle"></i> Close
+          </button>
+          <button
+            type="button"
+            class="btn w-sm btn-danger"
+            id="delete-product"
+            (click)="deleteData(userId)"
+            (click)="modal.close('Close click')"
+          >
+            Yes, Delete It!
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </ng-template>
+</div>

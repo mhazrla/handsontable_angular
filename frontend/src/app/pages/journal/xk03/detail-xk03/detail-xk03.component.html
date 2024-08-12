@@ -1,0 +1,686 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header align-items-center d-flex">
+        <h4 class="card-title mb-0 flex-grow-1">Vendor Line Item Display</h4>
+      </div>
+
+      <!-- end card header -->
+      <div class="card-body">
+        <div class="live-preview">
+          <form [formGroup]="xk03Form">
+            <div class="row gy-4 mb-4">
+              <div class="col-lg-6">
+                <!--  -->
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="vendor" class="form-label">Vendor</label>
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="vendor"
+                      formControlName="vendor"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+
+                <div class="row" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="name" class="form-label">Name</label>
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="name"
+                      formControlName="name"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <!--  -->
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="createdOn" class="form-label">Created On</label>
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="createdOn"
+                      formControlName="createdOn"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+
+                <div class="row" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="createdBy" class="form-label">Created By</label>
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="createdBy"
+                      formControlName="createdBy"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="row mb-4" style="align-items: baseline">
+                  <div>
+                    <label for="street" class="form-label">Street</label>
+                    <textarea
+                      class="form-control"
+                      id="street"
+                      rows="3"
+                      formControlName="street"
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-4">
+                    <label for="postalCode" class="form-label"
+                      >Postal Code</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="postalCode"
+                      formControlName="postalCode"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                  <div class="col-lg-4">
+                    <label for="region" class="form-label">Region</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="region"
+                      formControlName="region"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                  <div class="col-lg-4">
+                    <label for="city" class="form-label">City</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="city"
+                      formControlName="city"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <!--  -->
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="accountGroup" class="form-label"
+                      >Account Group</label
+                    >
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="accountGroup"
+                      formControlName="accountGroup"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="reconAccount" class="form-label"
+                      >Recon Account</label
+                    >
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="reconAccount"
+                      formControlName="reconAccount"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="taxNumber1" class="form-label"
+                      >TAX Number 1</label
+                    >
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="taxNumber1"
+                      formControlName="taxNumber1"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="telephone1" class="form-label"
+                      >Telephone 1</label
+                    >
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="telephone1"
+                      formControlName="telephone1"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label
+                      for="vatRegistrationNo"
+                      class="form-label"
+                      style="font-size: 0.81rem"
+                      >Vat Registration No.</label
+                    >
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="vatRegistrationNo"
+                      formControlName="vatRegistrationNo"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="url" class="form-label">URL</label>
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="url"
+                      formControlName="url"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="typeOfBusiness" class="form-label"
+                      >Type Of Business</label
+                    >
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="typeOfBusiness"
+                      formControlName="typeOfBusiness"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <!--  -->
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="taxNumber2" class="form-label"
+                      >TAX Number 2</label
+                    >
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="taxNumber2"
+                      formControlName="taxNumber2"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="telephone2" class="form-label"
+                      >Telephone 2</label
+                    >
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="telephone2"
+                      formControlName="telephone2"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="sortKey" class="form-label">Sort Key</label>
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="sortKey"
+                      formControlName="sortKey"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+
+                <div class="row mb-3" style="align-items: baseline">
+                  <div class="col-lg-3">
+                    <label for="paymentTerm" class="form-label"
+                      >Payment Term</label
+                    >
+                  </div>
+                  <div class="col-lg-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="paymentTerm"
+                      formControlName="paymentTerm"
+                      placeholder="-- FILL --"
+                    />
+                  </div>
+                </div>
+              </div>
+              <!--end col-->
+            </div>
+          </form>
+          <!--end row-->
+          <div class="d-flex flex-row-reverse">
+            <div class="p-2 w-full">
+              <button
+                type="button"
+                class="btn add-btn btn-animation waves-effect waves-light primary-color"
+                id="create-btn"
+                data-text="Next"
+              >
+                <span>Next</span>
+              </button>
+            </div>
+            <div class="p-2 w-full">
+              <button
+                type="button"
+                class="btn add-btn btn-animation waves-effect waves-light btn-danger"
+                id="create-btn"
+                data-text="Back"
+              >
+                <span>Back</span>
+              </button>
+            </div>
+          </div>
+          <!--end row-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end col-->
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <!-- Card Body -->
+      <div class="card-body">
+        <!-- First Table -->
+        <div class="live-preview mb-5">
+          <h4 class="card-title mb-3 flex-grow-1">
+            Display Withholding Tax Accounting
+          </h4>
+
+          <!-- Dropdown for Table 1 -->
+          <div class="dropdown">
+            <button class="dropbtn" (click)="toggleDropdown('table1')">
+              ⚙️
+            </button>
+            <div
+              class="dropdown-content"
+              [class.show]="tablesConfig['table1'].isDropdownOpen"
+            >
+              <div class="dropdown-scrollable">
+                <div
+                  *ngFor="
+                    let column of tablesConfig['table1'].columns;
+                    let i = index
+                  "
+                >
+                  <label>
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      [checked]="
+                        !tablesConfig['table1'].hiddenColumns.includes(i)
+                      "
+                      (change)="toggleColumnVisibility('table1', i)"
+                    />
+                    {{ column }}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Handsontable Container 1 -->
+          <div class="table-responsive">
+            <div #hotContainer1 id="example1"></div>
+          </div>
+
+          <!-- Pagination Controls -->
+          <div class="mt-3 d-flex justify-content-between">
+            <!-- Rows per page dropdown -->
+            <div class="d-flex align-items-center">
+              <select
+                class="form-control"
+                (change)="setPageSize('table1', $event)"
+                style="width: auto"
+              >
+                <option
+                  value="5"
+                  [selected]="tablesConfig['table1'].itemsPerPage === 5"
+                >
+                  5
+                </option>
+                <option
+                  value="10"
+                  [selected]="tablesConfig['table1'].itemsPerPage === 10"
+                >
+                  10
+                </option>
+                <option
+                  value="15"
+                  [selected]="tablesConfig['table1'].itemsPerPage === 15"
+                >
+                  15
+                </option>
+              </select>
+              <p class="mb-0" style="margin-left: 1rem">Rows / Page</p>
+            </div>
+
+            <!-- Showing rows information -->
+            <div class="mt-2">
+              <span>
+                Showing
+                {{
+                  (tablesConfig["table1"].currentPage - 1) *
+                    tablesConfig["table1"].itemsPerPage +
+                    1
+                }}
+                to
+                {{
+                  tablesConfig["table1"].currentPage *
+                    tablesConfig["table1"].itemsPerPage >
+                  xk03s.length
+                    ? xk03s.length
+                    : tablesConfig["table1"].currentPage *
+                      tablesConfig["table1"].itemsPerPage
+                }}
+                of {{ xk03s.length }} rows
+              </span>
+            </div>
+
+            <!-- Pagination controls -->
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <button
+                  class="btn btn-sm primary-color mr-2"
+                  (click)="onPreviousPage('table1')"
+                  [disabled]="tablesConfig['table1'].currentPage === 1"
+                >
+                  <!-- SVG for previous button -->
+                  <svg
+                    fill="#ffffff"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 32 32"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    stroke="#ffffff"
+                  >
+                    <g id="SVGRepo_iconCarrier">
+                      <path
+                        d="M23.505 0c0.271 0 0.549 0.107 0.757 0.316 0.417 0.417 0.417 1.098 0 1.515l-14.258 14.264 14.050 14.050c0.417 0.417 0.417 1.098 0 1.515s-1.098 0.417-1.515 0l-14.807-14.807c-0.417-0.417-0.417-1.098 0-1.515l15.015-15.022c0.208-0.208 0.486-0.316 0.757-0.316z"
+                      ></path>
+                    </g>
+                  </svg>
+                </button>
+
+                <span style="margin: 0 1rem 0 1rem">{{
+                  tablesConfig["table1"].currentPage
+                }}</span>
+
+                <button
+                  class="btn btn-sm primary-color"
+                  (click)="onNextPage('table1')"
+                  [disabled]="
+                    tablesConfig['table1'].currentPage ===
+                    tablesConfig['table1'].totalPages
+                  "
+                >
+                  <!-- SVG for next button (rotated) -->
+                  <svg
+                    fill="#ffffff"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 32 32"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    transform="rotate(180)"
+                    stroke="#ffffff"
+                  >
+                    <g id="SVGRepo_iconCarrier">
+                      <path
+                        d="M23.505 0c0.271 0 0.549 0.107 0.757 0.316 0.417 0.417 0.417 1.098 0 1.515l-14.258 14.264 14.050 14.050c0.417 0.417 0.417 1.098 0 1.515s-1.098 0.417-1.515 0l-14.807-14.807c-0.417-0.417-0.417-1.098 0-1.515l15.015-15.022c0.208-0.208 0.486-0.316 0.757-0.316z"
+                      ></path>
+                    </g>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Second Table -->
+        <div class="live-preview mb-5">
+          <h4 class="card-title mb-3 flex-grow-1">
+            Display Vendor Payment Transaction
+          </h4>
+
+          <!-- Dropdown for Table 2 -->
+          <div class="dropdown">
+            <button class="dropbtn" (click)="toggleDropdown('table2')">
+              ⚙️
+            </button>
+            <div
+              class="dropdown-content"
+              [class.show]="tablesConfig['table2'].isDropdownOpen"
+            >
+              <div class="dropdown-scrollable">
+                <div
+                  *ngFor="
+                    let column of tablesConfig['table2'].columns;
+                    let i = index
+                  "
+                >
+                  <label>
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      [checked]="
+                        !tablesConfig['table2'].hiddenColumns.includes(i)
+                      "
+                      (change)="toggleColumnVisibility('table2', i)"
+                    />
+                    {{ column }}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Handsontable Container 2 -->
+          <div class="table-responsive">
+            <div #hotContainer2 id="example2"></div>
+          </div>
+
+          <!-- Pagination Controls -->
+          <div class="mt-3 d-flex justify-content-between">
+            <!-- Rows per page dropdown -->
+            <div class="d-flex align-items-center">
+              <select
+                class="form-control"
+                (change)="setPageSize('table2', $event)"
+                style="width: auto"
+              >
+                <option
+                  value="5"
+                  [selected]="tablesConfig['table2'].itemsPerPage === 5"
+                >
+                  5
+                </option>
+                <option
+                  value="10"
+                  [selected]="tablesConfig['table2'].itemsPerPage === 10"
+                >
+                  10
+                </option>
+                <option
+                  value="15"
+                  [selected]="tablesConfig['table2'].itemsPerPage === 15"
+                >
+                  15
+                </option>
+              </select>
+              <p class="mb-0" style="margin-left: 1rem">Rows / Page</p>
+            </div>
+
+            <!-- Showing rows information -->
+            <div class="mt-2">
+              <span>
+                Showing
+                {{
+                  (tablesConfig["table2"].currentPage - 1) *
+                    tablesConfig["table2"].itemsPerPage +
+                    1
+                }}
+                to
+                {{
+                  tablesConfig["table2"].currentPage *
+                    tablesConfig["table2"].itemsPerPage >
+                  xk03s.length
+                    ? xk03s.length
+                    : tablesConfig["table2"].currentPage *
+                      tablesConfig["table2"].itemsPerPage
+                }}
+                of {{ xk03s.length }} rows
+              </span>
+            </div>
+
+            <!-- Pagination controls -->
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <button
+                  class="btn btn-sm primary-color mr-2"
+                  (click)="onPreviousPage('table2')"
+                  [disabled]="tablesConfig['table2'].currentPage === 1"
+                >
+                  <!-- SVG for previous button -->
+                  <svg
+                    fill="#ffffff"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 32 32"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    stroke="#ffffff"
+                  >
+                    <g id="SVGRepo_iconCarrier">
+                      <path
+                        d="M23.505 0c0.271 0 0.549 0.107 0.757 0.316 0.417 0.417 0.417 1.098 0 1.515l-14.258 14.264 14.050 14.050c0.417 0.417 0.417 1.098 0 1.515s-1.098 0.417-1.515 0l-14.807-14.807c-0.417-0.417-0.417-1.098 0-1.515l15.015-15.022c0.208-0.208 0.486-0.316 0.757-0.316z"
+                      ></path>
+                    </g>
+                  </svg>
+                </button>
+
+                <span style="margin: 0 1rem 0 1rem">{{
+                  tablesConfig["table2"].currentPage
+                }}</span>
+
+                <button
+                  class="btn btn-sm primary-color"
+                  (click)="onNextPage('table2')"
+                  [disabled]="
+                    tablesConfig['table2'].currentPage ===
+                    tablesConfig['table2'].totalPages
+                  "
+                >
+                  <!-- SVG for next button (rotated) -->
+                  <svg
+                    fill="#ffffff"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 32 32"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    transform="rotate(180)"
+                    stroke="#ffffff"
+                  >
+                    <g id="SVGRepo_iconCarrier">
+                      <path
+                        d="M23.505 0c0.271 0 0.549 0.107 0.757 0.316 0.417 0.417 0.417 1.098 0 1.515l-14.258 14.264 14.050 14.050c0.417 0.417 0.417 1.098 0 1.515s-1.098 0.417-1.515 0l-14.807-14.807c-0.417-0.417-0.417-1.098 0-1.515l15.015-15.022c0.208-0.208 0.486-0.316 0.757-0.316z"
+                      ></path>
+                    </g>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Footer -->
+      <div class="card-footer">
+        <div class="d-flex flex-row-reverse">
+          <div class="p-2 w-full">
+            <button
+              type="button"
+              class="btn btn-danger add-btn btn-animation waves-effect waves-light"
+              id="create-btn"
+              data-text="Back"
+            >
+              <span>Back</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Column -->
+</div>

@@ -1,0 +1,281 @@
+<!-- Start Breadcrumbs -->
+<!-- <app-breadcrumbs
+  title="Basic Elements"
+  [breadcrumbItems]="breadCrumbItems"
+></app-breadcrumbs> -->
+<!-- End Breadcrumbs -->
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body border border-dashed border-end-0 border-start-0">
+        <div class="row align-items-center gy-3">
+          <div class="col-auto fw-bold">Filter By :</div>
+          <div class="col-3">
+            <div class="search-box">
+              <input
+                type="text"
+                name="searchTerm1"
+                class="form-control"
+                placeholder="Search for Name, detail, or something..."
+              />
+              <i class="ri-search-line search-icon"></i>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="search-box">
+              <input
+                type="text"
+                name="searchTerm2"
+                class="form-control"
+                placeholder="Search for Name, detail, or something..."
+              />
+              <i class="ri-search-line search-icon"></i>
+            </div>
+          </div>
+          <div class="col-auto ms-auto">
+            <a
+              type="button"
+              class="btn add-btn primary-color"
+              id="create-btn"
+              href="/journal/f02/create"
+            >
+              <i class="ri-add-line align-bottom me-1"></i> Create Journal
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <!-- YEZ -->
+        <div class="live-preview">
+          <!-- Table -->
+          <div class="table-responsive">
+            <div #hotContainer id="example"></div>
+          </div>
+          <!-- End Table -->
+
+          <!-- Pagination Controls -->
+          <div class="mt-3 d-flex justify-content-between">
+            <div class="d-flex align-items-center">
+              <select
+                class="form-control"
+                (change)="setPageSize($event)"
+                style="width: auto"
+              >
+                <option value="5" [selected]="itemsPerPage === 5">5</option>
+                <option value="10" [selected]="itemsPerPage === 10">10</option>
+                <option value="15" [selected]="itemsPerPage === 15">15</option>
+              </select>
+              <p class="mb-0" style="margin-left: 1rem">Rows / Page</p>
+            </div>
+
+            <div class="mt-2">
+              <span>
+                Showing
+                {{ (paginationService.currentPage - 1) * itemsPerPage + 1 }} to
+                {{
+                  paginationService.currentPage *
+                    paginationService.itemsPerPage >
+                  f02s.length
+                    ? f02s.length
+                    : paginationService.currentPage *
+                      paginationService.itemsPerPage
+                }}
+                of {{ f02s.length }} rows
+              </span>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <button
+                  class="btn btn-sm primary-color mr-2"
+                  (click)="onPreviousPage()"
+                  [disabled]="paginationService.currentPage === 1"
+                >
+                  <svg
+                    fill="#ffffff"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 32 32"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    stroke="#ffffff"
+                  >
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      <path
+                        d="M23.505 0c0.271 0 0.549 0.107 0.757 0.316 0.417 0.417 0.417 1.098 0 1.515l-14.258 14.264 14.050 14.050c0.417 0.417 0.417 1.098 0 1.515s-1.098 0.417-1.515 0l-14.807-14.807c-0.417-0.417-0.417-1.098 0-1.515l15.015-15.022c0.208-0.208 0.486-0.316 0.757-0.316z"
+                      ></path>
+                    </g>
+                  </svg>
+                </button>
+                <span style="margin: 0 1rem 0 1rem">{{
+                  paginationService.currentPage
+                }}</span>
+                <button
+                  class="btn btn-sm primary-color"
+                  (click)="onNextPage()"
+                  [disabled]="
+                    paginationService.currentPage ===
+                    paginationService.totalPages
+                  "
+                >
+                  <svg
+                    fill="#ffffff"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 32 32"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    transform="rotate(180)"
+                    stroke="#ffffff"
+                  >
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      <path
+                        d="M23.505 0c0.271 0 0.549 0.107 0.757 0.316 0.417 0.417 0.417 1.098 0 1.515l-14.258 14.264 14.050 14.050c0.417 0.417 0.417 1.098 0 1.515s-1.098 0.417-1.515 0l-14.807-14.807c-0.417-0.417-0.417-1.098 0-1.515l15.015-15.022c0.208-0.208 0.486-0.316 0.757-0.316z"
+                      ></path>
+                    </g>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- End Pagination Controls -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--end row-->
+
+<ng-template #content role="document" let-modal>
+  <div class="modal-header bg-light p-3">
+    <h5 class="modal-title">Reverse Document</h5>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="modal"
+      aria-label="Close"
+      id="close-modal"
+      (click)="cancelEdit()"
+    ></button>
+  </div>
+  <div class="modal-body p-4">
+    <form [formGroup]="reverseForm">
+      <h5 class="fw-bold mb-3">Document Details</h5>
+      <div class="row mb-3" style="align-items: baseline">
+        <div class="col-lg-3">
+          <label for="documentNumber" class="form-label">Document Number</label>
+        </div>
+
+        <div class="col-lg-9">
+          <input
+            type="text"
+            class="form-control"
+            id="documentNumber"
+            formControlName="documentNumber"
+          />
+        </div>
+      </div>
+
+      <div class="row mb-3" style="align-items: baseline">
+        <div class="col-lg-3">
+          <label for="companyCode" class="form-label">Company Code</label>
+        </div>
+
+        <div class="col-lg-9">
+          <input
+            type="text"
+            class="form-control"
+            id="companyCode"
+            formControlName="companyCode"
+          />
+        </div>
+      </div>
+
+      <div class="row mb-3" style="align-items: baseline">
+        <div class="col-lg-3">
+          <label for="year" class="form-label">Fiscal Year</label>
+        </div>
+
+        <div class="col-lg-9">
+          <input
+            type="text"
+            class="form-control"
+            id="year"
+            formControlName="year"
+          />
+        </div>
+      </div>
+
+      <h5 class="fw-bold mb-3 mt-5">Document Details</h5>
+
+      <div class="row mb-3" style="align-items: baseline">
+        <div class="col-lg-3">
+          <label for="reversalReason" class="form-label">Reversal Reason</label>
+        </div>
+
+        <div class="col-lg-9">
+          <textarea
+            id="reversalReason"
+            formControlName="reversalReason"
+            class="form-control"
+            id="exampleFormControlTextarea5"
+            rows="3"
+          ></textarea>
+
+          <div
+            *ngIf="
+              reverseForm.get('reversalReason')?.invalid &&
+              reverseForm.get('reversalReason')?.touched
+            "
+            class="text-danger mb-1"
+          >
+            Reversal Reason is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3" style="align-items: baseline">
+        <div class="col-lg-3">
+          <label for="postingDate" class="form-label">Posting Date</label>
+        </div>
+
+        <div class="col-lg-9">
+          <input
+            type="date"
+            class="form-control"
+            id="postingDate"
+            formControlName="postingDate"
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer p-3">
+    <button type="button" class="btn btn-secondary" (click)="cancelEdit()">
+      Cancel
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="onSubmitReverseDocument()"
+    >
+      Save changes
+    </button>
+  </div>
+</ng-template>

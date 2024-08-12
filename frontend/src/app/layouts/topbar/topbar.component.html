@@ -1,0 +1,155 @@
+<header id="page-topbar" data-scroll-header (window:scroll)="windowScroll()">
+  <div class="layout-width">
+    <div class="navbar-header">
+      <div class="d-flex">
+        <!-- LOGO -->
+        <div class="navbar-brand-box horizontal-logo">
+          <a routerLink="" class="logo logo-dark">
+            <span class="logo-sm">
+              <img src="assets/images/logo-sm.png" alt="" height="22" />
+            </span>
+            <span class="logo-lg">
+              <img src="assets/images/logo-dark.png" alt="" height="17" />
+            </span>
+          </a>
+
+          <a routerLink="" class="logo logo-light">
+            <span class="logo-sm">
+              <img src="assets/images/logo-sm.png" alt="" height="22" />
+            </span>
+            <span class="logo-lg">
+              <img src="assets/images/logo-light.png" alt="" height="17" />
+            </span>
+          </a>
+        </div>
+
+        <button
+          type="button"
+          class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
+          id="topnav-hamburger-icon"
+          (click)="toggleMobileMenu($event)"
+        >
+          <span class="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+
+        <!-- App Search-->
+        <div
+          class="d-none d-md-block"
+          style="display: flex; align-items: center"
+        >
+          <div class="websap-title">
+            <span class="websap-text">WEBSAP</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center">
+           <div class="dropdown ms-1 topbar-head-dropdown header-item" ngbDropdown>
+                    <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ngbDropdownToggle>
+                        <img *ngIf="flagvalue !== undefined" src="{{flagvalue}}" alt="Header Language" height="20"
+                            class="rounded">
+                        <img *ngIf="flagvalue === undefined" src="{{valueset}}" alt="Header Language" height="20"
+                            class="rounded">
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item language py-2" data-lang="eng"
+                            *ngFor="let item of listLang" (click)="setLanguage(item.text, item.lang, item.flag)"
+                            [ngClass]="{'active': cookieValue === item.lang}">
+                            <img src="{{item.flag}}" alt="user-image" class="me-2 rounded" height="18"> <span
+                                class="align-middle">{{item.text}}</span>
+                        </a>
+                    </div>
+                </div>
+
+                
+        <div class="ms-1 header-item d-none d-sm-flex align-items-center">
+          <button
+            type="button"
+            class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle light-dark-mode"
+            (click)="changeMode('dark')"
+          >
+            <!-- (click)="changeMode('light')" -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              fill="currentColor"
+              class="bi bi-question-circle"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
+              />
+              <path
+                d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94"
+              />
+            </svg>
+          </button>
+          <p class="mb-0">Help</p>
+        </div>
+        <div class="dropdown ms-sm-3 header-item topbar-user" ngbDropdown>
+          <button
+            type="button"
+            class="btn"
+            id="page-header-user-dropdown"
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            ngbDropdownToggle
+          >
+            <span class="d-flex align-items-center">
+              <img
+                class="rounded-circle header-profile-user"
+                src="assets/images/users/avatar-1.jpg"
+                alt="Header Avatar"
+              />
+              <span class="text-start ms-xl-2">
+                <span
+                  class="d-none d-xl-inline-block ms-1 fw-medium user-name-text"
+                  >{{ userData.name }}
+                </span>
+                <span
+                  class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text"
+                  >{{ userData.role_name }}</span
+                >
+              </span>
+            </span>
+          </button>
+          <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+            <!-- item-->
+            <h6 class="dropdown-header">Welcome Anna!</h6>
+            <a class="dropdown-item" routerLink="/profile"
+              ><i
+                class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"
+              ></i>
+              <span class="align-middle">Profile</span></a
+            >
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" routerLink="/pages/profile"
+              ><span class="badge bg-soft-success text-success mt-1 float-end"
+                >New</span
+              ><i
+                class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"
+              ></i>
+              <span class="align-middle">Settings</span></a
+            >
+            <a
+              class="dropdown-item"
+              href="javascript: void(0);"
+              (click)="logout()"
+              ><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
+              <span class="align-middle" data-key="t-logout">Logout</span></a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
