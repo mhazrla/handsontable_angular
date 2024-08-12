@@ -22,7 +22,7 @@ export class TokenStorageService {
     return localStorage.getItem('token');
   }
 
-  public saveUser(name:string, data: any): void {
+  public saveUser(name: string, data: any): void {
     window.localStorage.removeItem(name);
     window.localStorage.setItem(name, JSON.stringify(data));
   }

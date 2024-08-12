@@ -91,7 +91,7 @@ export const MENU: MenuItem[] = [
         label: 'MENUITEMS.MASTER.LIST.ROLE_TO_PERMISSION',
         link: '/master/role-permission',
         parentId: 10,
-    },
+      },
     ],
   },
   {

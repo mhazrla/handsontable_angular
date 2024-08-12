@@ -18,10 +18,9 @@ import { CartModel } from './topbar.model';
 @Component({
   selector: 'app-topbar',
   templateUrl: './topbar.component.html',
-  styleUrls: ['./topbar.component.scss']
+  styleUrls: ['./topbar.component.scss'],
 })
 export class TopbarComponent implements OnInit {
-
   element: any;
   mode: string | undefined;
   @Output() mobileMenuButtonClicked = new EventEmitter();
@@ -32,9 +31,17 @@ export class TopbarComponent implements OnInit {
   cookieValue: any;
   userData: any;
 
-  constructor(@Inject(DOCUMENT) private document: any, private eventService: EventService, public languageService: LanguageService,
-    public _cookiesService: CookieService, public translate: TranslateService, private authService: AuthenticationService, private authFackservice: AuthfakeauthenticationService,
-    private router: Router, private TokenStorageService: TokenStorageService) { }
+  constructor(
+    @Inject(DOCUMENT) private document: any,
+    private eventService: EventService,
+    public languageService: LanguageService,
+    public _cookiesService: CookieService,
+    public translate: TranslateService,
+    private authService: AuthenticationService,
+    private authFackservice: AuthfakeauthenticationService,
+    private router: Router,
+    private TokenStorageService: TokenStorageService
+  ) {}
 
   ngOnInit(): void {
     this.userData = this.TokenStorageService.getUser();
@@ -42,22 +49,22 @@ export class TopbarComponent implements OnInit {
 
     // Cookies wise Language set
     this.cookieValue = this._cookiesService.get('lang');
-    const val = this.listLang.filter(x => x.lang === this.cookieValue);
-    this.countryName = val.map(element => element.text);
+    const val = this.listLang.filter((x) => x.lang === this.cookieValue);
+    this.countryName = val.map((element) => element.text);
     if (val.length === 0) {
-      if (this.flagvalue === undefined) { this.valueset = 'assets/images/flags/us.svg'; }
+      if (this.flagvalue === undefined) {
+        this.valueset = 'assets/images/flags/us.svg';
+      }
     } else {
-      this.flagvalue = val.map(element => element.flag);
+      this.flagvalue = val.map((element) => element.flag);
     }
-
-
   }
 
   /**
    * Toggle the menu bar when having mobile screen
    */
   toggleMobileMenu(event: any) {
-    document.querySelector('.hamburger-icon')?.classList.toggle('open')
+    document.querySelector('.hamburger-icon')?.classList.toggle('open');
     event.preventDefault();
     this.mobileMenuButtonClicked.emit();
   }
@@ -68,8 +75,10 @@ export class TopbarComponent implements OnInit {
   fullscreen() {
     document.body.classList.toggle('fullscreen-enable');
     if (
-      !document.fullscreenElement && !this.element.mozFullScreenElement &&
-      !this.element.webkitFullscreenElement) {
+      !document.fullscreenElement &&
+      !this.element.mozFullScreenElement &&
+      !this.element.webkitFullscreenElement
+    ) {
       if (this.element.requestFullscreen) {
         this.element.requestFullscreen();
       } else if (this.element.mozRequestFullScreen) {
@@ -98,27 +107,26 @@ export class TopbarComponent implements OnInit {
     }
   }
 
-  ngAfterViewInit() {
-  }
+  ngAfterViewInit() {}
 
   /**
-  * Topbar Light-Dark Mode Change
-  */
+   * Topbar Light-Dark Mode Change
+   */
   changeMode(mode: string) {
     this.mode = mode;
     this.eventService.broadcast('changeMode', mode);
 
     switch (mode) {
       case 'light':
-        document.body.setAttribute('data-layout-mode', "light");
-        document.body.setAttribute('data-sidebar', "light");
+        document.body.setAttribute('data-layout-mode', 'light');
+        document.body.setAttribute('data-sidebar', 'light');
         break;
       case 'dark':
-        document.body.setAttribute('data-layout-mode', "dark");
-        document.body.setAttribute('data-sidebar', "dark");
+        document.body.setAttribute('data-layout-mode', 'dark');
+        document.body.setAttribute('data-sidebar', 'dark');
         break;
       default:
-        document.body.setAttribute('data-layout-mode', "light");
+        document.body.setAttribute('data-layout-mode', 'light');
         break;
     }
   }
@@ -162,14 +170,17 @@ export class TopbarComponent implements OnInit {
   }
 
   windowScroll() {
-    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-      (document.getElementById('back-to-top') as HTMLElement).style.display = "block";
-      document.getElementById('page-topbar')?.classList.add('topbar-shadow')
+    if (
+      document.body.scrollTop > 100 ||
+      document.documentElement.scrollTop > 100
+    ) {
+      (document.getElementById('back-to-top') as HTMLElement).style.display =
+        'block';
+      document.getElementById('page-topbar')?.classList.add('topbar-shadow');
     } else {
-      (document.getElementById('back-to-top') as HTMLElement).style.display = "none";
-      document.getElementById('page-topbar')?.classList.remove('topbar-shadow')
+      (document.getElementById('back-to-top') as HTMLElement).style.display =
+        'none';
+      document.getElementById('page-topbar')?.classList.remove('topbar-shadow');
     }
   }
-
-
 }
